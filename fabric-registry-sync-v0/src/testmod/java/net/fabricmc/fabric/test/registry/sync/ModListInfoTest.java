@@ -28,6 +28,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.logging.LogUtils;
+
+import net.minecraft.resources.Identifier;
+import net.fabricmc.fabric.api.event.Event;
 import org.slf4j.Logger;
 
 import net.minecraft.world.level.storage.LevelResource;
@@ -48,8 +51,10 @@ public class ModListInfoTest implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		Identifier latePhase = Identifier.fromNamespaceAndPath("fabric-registry-sync-v0-testmod", "late");
+		ServerLifecycleEvents.AFTER_SAVE.addPhaseOrdering(Event.DEFAULT_PHASE, latePhase);
 		// Run the validation after the first save completes.
-		ServerLifecycleEvents.AFTER_SAVE.register((server, flush, force) -> {
+		ServerLifecycleEvents.AFTER_SAVE.register(latePhase, (server, flush, force) -> {
 			if (this.hasRun) {
 				return;
 			}

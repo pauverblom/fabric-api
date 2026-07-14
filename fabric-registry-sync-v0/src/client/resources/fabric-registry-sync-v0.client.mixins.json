@@ -6,7 +6,10 @@
     "RegistryDataCollectorMixin",
     "RegistryDataCollectorContentsCollectorAccessor",
     "MinecraftMixin",
-    "ParticleResourcesMixin"
+    "ParticleResourcesMixin",
+    "WorldSelectionListMixin",
+    "LevelSummaryMixin",
+    "WorldOpenFlowsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
